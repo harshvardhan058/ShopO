@@ -73,14 +73,21 @@ const Checkout = () => {
     const name = couponCode;
 
     await axios.get(`${server}/coupon/get-coupon-value/${name}`).then((res) => {
-      const shopId = res.data.couponCode?.shopId;
+      // const shopId = res.data.couponCode?.shopId;
+      const productName = res.data.couponCode?.selectedProducts;
       const couponCodeValue = res.data.couponCode?.value;
       if (res.data.couponCode !== null) {
+        // const isCouponValid =
+        //   cart && cart.filter((item) => item.shopId === shopId);
+
         const isCouponValid =
-          cart && cart.filter((item) => item.shopId === shopId);
+          cart &&
+          cart.filter(
+            (item) => item.name.toLowerCase() === productName.toLowerCase()
+          );
 
         if (isCouponValid.length === 0) {
-          toast.error("Coupon code is not valid for this shop");
+          toast.error("Coupon code is not valid for this Product");
           setCouponCode("");
         } else {
           const eligiblePrice = isCouponValid.reduce(
