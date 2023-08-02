@@ -89,6 +89,12 @@ const AllCoupons = () => {
       flex: 0.6,
     },
     {
+      field: "product",
+      headerName: "ProductId",
+      minWidth: 100,
+      flex: 1.4,
+    },
+    {
       field: "Delete",
       flex: 0.8,
       minWidth: 120,
@@ -115,7 +121,7 @@ const AllCoupons = () => {
         id: item._id,
         name: item.name,
         price: item.value + " %",
-        sold: 10,
+        product: item.selectedProducts,
       });
     });
 
@@ -229,6 +235,7 @@ const AllCoupons = () => {
                         ))}
                     </select>
                   </div>
+
                   <br />
                   <div>
                     <input
